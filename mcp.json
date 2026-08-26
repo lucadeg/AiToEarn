@@ -1,0 +1,6 @@
+{
+  "name": "aitolearn-mcp",
+  "command": "python",
+  "args": ["C:/Users/Deglu/.hermes/tools/AiToEarn/mcp_server.py"],
+  "env": {}
+}
