@@ -1,12 +1,7 @@
+
 name: Build Web Image
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'project/aitoearn-web/**'
-      - '.github/workflows/web-build.yml'
   workflow_dispatch:
     inputs:
       version:
@@ -19,6 +14,7 @@ on:
         type: boolean
         default: false
 
+  # Automatic triggers removed; invoke through FounderOS/Admin Gate.
 env:
   APP_NAME: aitoearn-web
   MONOREPO_DIR: project/aitoearn-web

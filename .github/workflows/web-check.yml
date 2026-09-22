@@ -1,9 +1,9 @@
+
 name: AitoEarn Web Check
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
+  workflow_dispatch:
+  # Automatic triggers removed; invoke through FounderOS/Admin Gate.
 permissions:
   contents: read
   pull-requests: read
