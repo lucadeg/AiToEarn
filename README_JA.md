@@ -15,6 +15,24 @@ AiToEarnは**AI自動化**を通じて、クリエイター、ブランド、企
 対応チャンネル：
 抖音（Douyin）、小紅書（Rednote）、快手（Kuaishou）、bilibili、視頻号（WeChat Channels）、微信公式アカウント（WeChat Official Accounts）、TikTok、YouTube、Facebook、Instagram、Threads、Twitter（X）、Pinterest、LinkedIn
 
+## 特別なご支援に感謝 ❤️
+
+<table align="center">
+  <tr>
+    <td align="center" width="120">
+      <a href="https://metaso.cn/minimax-h3/?s=ATE"><img src="docs/sponsors/metaso-logo.png" alt="秘塔科技" width="100"></a><br>
+      <a href="https://metaso.cn/minimax-h3/?s=ATE"><strong>秘塔科技</strong></a>
+    </td>
+    <td align="left">
+      本プロジェクトをご支援いただいた<a href="https://metaso.cn/minimax-h3/?s=ATE">秘塔科技</a>に心より感謝します！<br>
+      <strong>MiniMax H3 動画生成 API｜秘塔科技</strong><br>
+      秘塔科技は、コストパフォーマンスに優れた MiniMax H3 動画生成サービスを提供しています：<strong>768P はわずか 0.09 元/秒、2K はわずか 0.15 元/秒</strong>。ネイティブ 2K と音声・映像の同期に対応し、API は <strong>OpenAI プロトコル</strong>と互換性があり、<strong>ComfyUI</strong>にも対応しています。GPU を自前で用意する必要はありません。<br>
+      🎁 <a href="https://metaso.cn/minimax-h3/?s=ATE">AiToEarn 専用リンクから登録</a>すると、無料クレジットと限定特典を受け取れます。<br>
+      ビジネスに関するお問い合わせは WeChat：metasota12 まで。
+    </td>
+  </tr>
+</table>
+
 ## 🚀 AiToEarnをすぐに使う（5つの方法）
 
 | 方法 | 対象 | デプロイ必要？ |
@@ -29,6 +47,7 @@ AiToEarnは**AI自動化**を通じて、クリエイター、ブランド、企
 
 ## 最新情報
 
+- **2026-06-23**: [2.5バージョン](https://github.com/yikart/AiToEarn/releases/tag/v2.5.0) — Relay 設定は設定管理画面で操作する方式になり、Server Relay と AI Relay に分かれました。Server Relay は公開プラットフォームの認証に、AI Relay はプラットフォーム提供の AI モデル利用に使用します。
 - **2026-05-21**: [2.4バージョン](https://github.com/yikart/AiToEarn/releases/tag/v2.4.0) — 草稿生成が HappyHorse 1.0 と Seedance 2.0 に新対応。動画・画像/テキスト草稿の一括生成、複数モデル選択、参照画像/動画、対象プラットフォーム制限、文案プロンプトを強化し、新しいUIスタイルと Twitter/X の探索・エンゲージメント機能も強化しました。
 - **2026-04-20**: OpenClaw（ロブスター）で AiToEarn の収益化タスクに新対応し、OpenClaw 内で直接受け取り実行できるようになりました。
 - **2026-03-26**: [2.1バージョン](https://www.aitoearn.ai/) — コンテンツ取引マーケットプレイスをリリース。OpenClaw（ロブスター）対応を追加し、OpenClaw内で直接AiToEarnを使用可能に。MCPプロトコル対応を追加し、Claude、CursorなどMCP対応のエージェントやLLMでAiToEarnを使用可能に。
@@ -259,17 +278,16 @@ docker compose up -d
 
 > **なぜRelayが必要？** コンテンツを公開するにはソーシャルメディアアカウント（TikTok、Instagram、YouTubeなど）へのログインが必要で、これらのプラットフォームのOAuthログインには開発者認証情報が必要です。Relayを設定すれば、公式aitoearn.aiの認証情報を直接借用して認証を完了できるため、**各プラットフォームで開発者アカウントを申請する必要がありません**。
 
-`docker-compose.yml`の`aitoearn-server`サービスに以下を追加（API Keyの取得方法は[上記](#get-api-key)を参照）：
+ブラウザでデプロイ済みの画面を開き、**設定管理** に入り、必要に応じて次の項目を設定します：
 
-`RELAY_API_KEY` の取得元に合わせて `RELAY_SERVER_URL` を選択してください。中国版 Key は `https://aitoearn.cn/api`、国際版 Key は `https://aitoearn.ai/api` を使用します。環境と Key が一致しない場合は 401 になります。
+- **Server → Relay**：コンテンツ公開とソーシャルプラットフォームの OAuth 認証に使用します。
+- **AI → Relay**：プラットフォームが提供する AI モデルを利用するために使用します。
 
-```yaml
-RELAY_SERVER_URL: https://aitoearn.ai/api
-RELAY_API_KEY: あなたのAPI-Key
-RELAY_CALLBACK_URL: http://localhost:8080/api/plat/relay-callback
-```
+OpenAI、Gemini、Anthropic などのモデルプロバイダーも、**AI → モデルプロバイダー** でプラットフォーム提供の API Key と API URL を入力できます。
 
-その後再起動：`docker compose restart aitoearn-server`
+API Key の取得方法は [上記](#get-api-key) を参照してください。中国版 Key は `https://aitoearn.cn/api`、国際版 Key は `https://aitoearn.ai/api` と組み合わせて使用します。環境と Key が一致しない場合は 401 になります。
+
+保存後、**保存して再起動** をクリックして、対象サービスに設定を再読み込みさせます。
 
 > 📖 完全なデプロイガイド（本番環境設定、AIサービス、OAuth、ストレージなど）：[DOCKER_DEPLOYMENT_EN.md](DOCKER_DEPLOYMENT_EN.md)を参照。
 
@@ -289,8 +307,8 @@ Dockerを使用してMongoDB/Redisを実行するか、設定ファイルで独�
 cd project/aitoearn-backend
 pnpm install
 # ローカル開発用設定ファイルをコピー
-cp apps/aitoearn-ai/config/config.js apps/aitoearn-ai/config/local.config.js
-cp apps/aitoearn-server/config/config.js apps/aitoearn-server/config/local.config.js
+cp apps/aitoearn-ai/config/config.yaml apps/aitoearn-ai/config/local.config.yaml
+cp apps/aitoearn-server/config/config.yaml apps/aitoearn-server/config/local.config.yaml
 pnpm nx serve aitoearn-ai
 # 別のターミナルで
 pnpm nx serve aitoearn-server

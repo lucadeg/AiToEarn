@@ -13,7 +13,25 @@
 AiToEarn 通过 **AI Agent自动化**，帮助 OPC（一人公司）、创作者、品牌与企业在全球主流平台上构建、分发并变现内容。
 
 支持渠道：
-抖音、小红书（Rednote）、快手、哔哩哔哩、视频号、TikTok、YouTube、Facebook、Instagram、Threads、Twitter（X）、Pinterest、LinkedIn
+抖音、小红书（Rednote）、快手、哔哩哔哩、视频号、公众号、TikTok、YouTube、Facebook、Instagram、Threads、Twitter（X）、Pinterest、LinkedIn
+
+## 特别感谢 ❤️
+
+<table align="center">
+  <tr>
+    <td align="center" width="120">
+      <a href="https://metaso.cn/minimax-h3/?s=ATE"><img src="docs/sponsors/metaso-logo.png" alt="秘塔科技" width="100"></a><br>
+      <a href="https://metaso.cn/minimax-h3/?s=ATE"><strong>秘塔科技</strong></a>
+    </td>
+    <td align="left">
+      感谢<a href="https://metaso.cn/minimax-h3/?s=ATE">秘塔科技</a>对本项目的赞助！<br>
+      <strong>MiniMax H3 视频生成 API｜秘塔科技</strong><br>
+      秘塔科技提供高性价比的 MiniMax H3 视频生成服务：<strong>768P 仅 0.09 元/秒，2K 仅 0.15 元/秒</strong>。支持原生 2K、音画同步，API 兼容 <strong>OpenAI 协议</strong>，同时支持 <strong>ComfyUI</strong>，无需自行部署 GPU。<br>
+      🎁 通过 <a href="https://metaso.cn/minimax-h3/?s=ATE">AiToEarn专属链接注册</a>，即可领取赠送额度及专属优惠。<br>
+      商务对接可加微信：metasota12
+    </td>
+  </tr>
+</table>
 
 ## 🚀 快速使用 AiToEarn（5 种方式）
 
@@ -29,6 +47,7 @@ AiToEarn 通过 **AI Agent自动化**，帮助 OPC（一人公司）、创作者
 
 ## 最新动态
 
+- **2026-06-23**: [2.5 version](https://github.com/yikart/AiToEarn/releases/tag/v2.5.0) — Relay 配置改为在配置管理界面中操作，并拆分为 Server Relay 与 AI Relay：Server Relay 用于发布平台授权，AI Relay 用于使用平台提供的 AI 模型，新增[开放平台](https://docs.aitoearn.cn/)。
 - **2026-05-21**: [2.4 version](https://github.com/yikart/AiToEarn/releases/tag/v2.4.0) — 草稿生成新增支持 HappyHorse 1.0 和 Seedance 2.0，增强视频/图文草稿批量生成、多模型选择、参考图片/视频、目标平台限制与文案提示词；带来全新界面风格，并增强 Twitter/X 探索与互动能力。
 - **2026-04-20**: OpenClaw（龙虾）新增 AiToEarn 赚钱支持，可在龙虾中直接接收并执行内容变现任务。
 - **2026-03-26**: [2.1 version](https://www.aitoearn.ai/) — 内容交易市场上线；新增 OpenClaw（龙虾）支持，可在龙虾中直接使用 AiToEarn；新增 MCP 协议支持，可在 Claude、Cursor 等任何支持 MCP 的 Agent 或大模型中使用 AiToEarn。
@@ -260,17 +279,16 @@ docker compose up -d
 
 > **为什么要配 Relay？** 发布内容需要登录社交媒体账号（抖音、小红书、TikTok 等），而这些平台的 OAuth 登录需要开发者凭据。配置 Relay 后，你可以直接借用官方 aitoearn.ai 的凭据完成授权，**不需要自己去各平台申请开发者账号**。
 
-在 `docker-compose.yml` 的 `aitoearn-server` 服务中添加（API Key 获取方式见 [上方说明](#get-api-key)）：
+在浏览器打开部署后的界面，进入 **配置管理**，按需分别配置：
 
-请根据 `RELAY_API_KEY` 来源选择 `RELAY_SERVER_URL`：中国版 Key 使用 `https://aitoearn.cn/api`，国际版 Key 使用 `https://aitoearn.ai/api`。环境和 Key 不匹配会导致 401。
+- **Server → Relay 中转**：用于内容发布和社交平台 OAuth 授权。
+- **AI → Relay 中转**：用于使用平台提供的 AI 模型。
 
-```yaml
-RELAY_SERVER_URL: https://aitoearn.ai/api
-RELAY_API_KEY: 你的API-Key
-RELAY_CALLBACK_URL: http://localhost:8080/api/plat/relay-callback
-```
+OpenAI、Gemini、Anthropic 等模型服务商也可以在 **AI → 模型服务商** 中填写平台提供的 API Key 和 API 地址。
 
-然后重启：`docker compose restart aitoearn-server`
+API Key 获取方式见 [上方说明](#get-api-key)。中国版 Key 搭配 `https://aitoearn.cn/api`，国际版 Key 搭配 `https://aitoearn.ai/api`；环境和 Key 不匹配会导致 401。
+
+保存后点击 **保存并重启**，让对应服务重新加载配置。
 
 > 📖 完整部署指南（生产环境配置、AI 服务、OAuth、存储等）请参阅 [DOCKER_DEPLOYMENT_CN.md](DOCKER_DEPLOYMENT_CN.md)。
 
@@ -290,8 +308,8 @@ RELAY_CALLBACK_URL: http://localhost:8080/api/plat/relay-callback
 cd project/aitoearn-backend
 pnpm install
 # 复制配置文件用于本地开发
-cp apps/aitoearn-ai/config/config.js apps/aitoearn-ai/config/local.config.js
-cp apps/aitoearn-server/config/config.js apps/aitoearn-server/config/local.config.js
+cp apps/aitoearn-ai/config/config.yaml apps/aitoearn-ai/config/local.config.yaml
+cp apps/aitoearn-server/config/config.yaml apps/aitoearn-server/config/local.config.yaml
 pnpm nx serve aitoearn-ai
 # 在另一个终端
 pnpm nx serve aitoearn-server
@@ -341,7 +359,7 @@ Electron 项目为 AiToEarn 提供桌面客户端。
 - Telegram: [https://t.me/harryyyy2025](https://t.me/harryyyy2025)
 - 微信：扫码添加
 
-<img src="presentation/wechat.jpg" alt="微信二维码" width="200">
+<img src="presentation/wechat-0706.png" alt="微信二维码" width="200">
 
 ## 推荐
 - [AtomGit托管](https://atomgit.com/yikart/AitoEarn)

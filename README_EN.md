@@ -15,6 +15,24 @@ AiToEarn helps OPCs (One-Person Companies), creators, brands, and businesses bui
 Supported Channels:
 Douyin, Xiaohongshu (Rednote), Kuaishou, Bilibili, WeChat Channels, WeChat Official Accounts, TikTok, YouTube, Facebook, Instagram, Threads, Twitter (X), Pinterest, LinkedIn
 
+## Special Thanks ❤️
+
+<table align="center">
+  <tr>
+    <td align="center" width="120">
+      <a href="https://metaso.cn/minimax-h3/?s=ATE"><img src="docs/sponsors/metaso-logo.png" alt="Metaso" width="100"></a><br>
+      <a href="https://metaso.cn/minimax-h3/?s=ATE"><strong>Metaso</strong></a>
+    </td>
+    <td align="left">
+      Thanks to <a href="https://metaso.cn/minimax-h3/?s=ATE">Metaso</a> for sponsoring this project!<br>
+      <strong>MiniMax H3 Video Generation API | Metaso</strong><br>
+      Metaso offers cost-effective MiniMax H3 video generation: <strong>768P for just RMB 0.09/sec and 2K for just RMB 0.15/sec</strong>. It supports native 2K and synchronized audio and video; its API is compatible with the <strong>OpenAI protocol</strong>, and it also supports <strong>ComfyUI</strong>—no GPU deployment required.<br>
+      🎁 Sign up through the <a href="https://metaso.cn/minimax-h3/?s=ATE">exclusive AiToEarn link</a> to receive complimentary credits and special offers.<br>
+      For business inquiries, please add WeChat: metasota12
+    </td>
+  </tr>
+</table>
+
 ## 🚀 Quick Start with AiToEarn (5 Ways)
 
 | Option | Best for | Deployment needed? |
@@ -29,6 +47,7 @@ Douyin, Xiaohongshu (Rednote), Kuaishou, Bilibili, WeChat Channels, WeChat Offic
 
 ## What's New
 
+- **2026-06-23**: [2.5 version](https://github.com/yikart/AiToEarn/releases/tag/v2.5.0) — Relay configuration now happens in the Configuration UI and is split into Server Relay and AI Relay: Server Relay handles publishing platform authorization, while AI Relay lets users use AI models provided by the platform; also introduced the [Open Platform](https://docs.aitoearn.cn/).
 - **2026-05-21**: [2.4 version](https://github.com/yikart/AiToEarn/releases/tag/v2.4.0) — Draft generation now supports HappyHorse 1.0 and Seedance 2.0, with improved batch video/image-text draft generation, multi-model selection, reference images/videos, target-platform limits, and caption prompts; refreshed interface style and enhanced Twitter/X exploration and engagement.
 - **2026-04-20**: OpenClaw now supports AiToEarn earning workflows, so you can receive and execute monetization tasks directly inside OpenClaw.
 - **2026-03-26**: [2.1 version](https://www.aitoearn.ai/) — Content marketplace launched; added OpenClaw support for using AiToEarn directly within OpenClaw; added MCP protocol support for using AiToEarn in Claude, Cursor, and any MCP-compatible Agent or LLM.
@@ -254,17 +273,16 @@ Open **[http://localhost:8080](http://localhost:8080)** and you're ready to go.
 
 > **Why Relay?** Publishing content requires logging into social media accounts (TikTok, Instagram, YouTube, etc.), which need OAuth developer credentials. With Relay, you can use the official aitoearn.ai credentials — **no need to register as a developer on each platform**.
 
-Add to `docker-compose.yml` under `aitoearn-server` (see [How to Get an API Key](#get-api-key)):
+Open the deployed UI in your browser, go to **Configuration**, and configure these sections as needed:
 
-Choose `RELAY_SERVER_URL` based on where `RELAY_API_KEY` was created: use `https://aitoearn.cn/api` for China keys and `https://aitoearn.ai/api` for international keys. A mismatch returns 401.
+- **Server → Relay**: for content publishing and social platform OAuth authorization.
+- **AI → Relay**: for using AI models provided by the platform.
 
-```yaml
-RELAY_SERVER_URL: https://aitoearn.ai/api
-RELAY_API_KEY: your-api-key
-RELAY_CALLBACK_URL: http://localhost:8080/api/plat/relay-callback
-```
+For OpenAI, Gemini, Anthropic, and other model providers, you can also fill in the platform-provided API key and API URL under **AI → Model providers**.
 
-Then restart: `docker compose restart aitoearn-server`
+See [How to Get an API Key](#get-api-key). China keys must use `https://aitoearn.cn/api`, and international keys must use `https://aitoearn.ai/api`; mismatched environments return 401.
+
+After saving, click **Save and restart** so the corresponding service reloads the configuration.
 
 > 📖 Full deployment guide (production config, AI services, OAuth, storage, etc.): [DOCKER_DEPLOYMENT_EN.md](DOCKER_DEPLOYMENT_EN.md).
 
@@ -283,8 +301,8 @@ For local development and debugging. You can use Docker for MongoDB/Redis, or po
 cd project/aitoearn-backend
 pnpm install
 # Copy config files for local development
-cp apps/aitoearn-ai/config/config.js apps/aitoearn-ai/config/local.config.js
-cp apps/aitoearn-server/config/config.js apps/aitoearn-server/config/local.config.js
+cp apps/aitoearn-ai/config/config.yaml apps/aitoearn-ai/config/local.config.yaml
+cp apps/aitoearn-server/config/config.yaml apps/aitoearn-server/config/local.config.yaml
 pnpm nx serve aitoearn-ai
 # in another terminal
 pnpm nx serve aitoearn-server
